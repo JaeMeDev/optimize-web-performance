@@ -336,3 +336,45 @@ module.exports = function override(config, env) {
   return config;
 };
 ```
+
+## 캐시 최적화
+
+- cache-control header가 존재하는지 확인
+- 웹상에서의 캐시란?
+
+⇒ 데이터나 값을 미리 복사해 놓는 임시 장소나 그런 동작
+
+- 메모리 캐시
+
+⇒ RAM에 데이터를 저장해두는 방식 
+
+- 디스크 캐시
+
+⇒ File로 데이터를 저장해두는 방식
+
+- Cache-Control
+    - no-cache: 캐시를 사용하기 전에 서버에 검사 후, 사용 결정
+    - no-store: 캐시 사용 안함
+    - public : 모든 환경에서 캐시 사용 가능
+    - private : 브라우저 환경에서만 캐시 사용, 외부 캐시 서버에서는 사용 불가
+    - max-age : 캐시의 유효시간
+- ETag : 리소스에 해당하는 hash(서버에서 내려주는것)
+    - cache 로 불러올 값이 바뀐지, 안바뀐지 확인하기 위해서 사용
+- 기본적으로 캐시는 항상 적용되는 것이 좋다.
+    - 단 리소스가 변경되지 않는다는 전제하에.
+- 리소스 별 캐시 설정
+    - HTMl : no-cache
+    - JS : public, max-age=3153600
+    - css : public, max-age=3153600
+    - img : public, max-age=3153600
+
+## 불필요한 CSS 제거
+
+- 사용하지 않은 CSS를 지우기(Remove unused CSS)
+- Coverage 탭 이용
+- bundle할때 사용하지 않은 CSS를 지울 수 있다.
+- purgecss tool 사용
+
+```jsx
+npm i -g purgecss
+```
